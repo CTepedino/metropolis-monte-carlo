@@ -34,9 +34,10 @@ public class MetropolisMethod {
         } else {
             cutCondition = (n) -> true;
         }
-        double[] Ms = new double[N];
 
         try(FileWriter fb = new FileWriter("output.txt")){
+            fb.write(String.format("N: %d\n", N));
+            fb.write(String.format("p: %.2f\n\n", p));
             for(long it = 0; cutCondition.test(it); it++){
                 int randomPersonRow = random.nextInt(0, N);
                 int randomPersonCol = random.nextInt(0, N);
@@ -51,17 +52,13 @@ public class MetropolisMethod {
                 } else {
                     grid[randomPersonRow][randomPersonCol] = mayorityOpinion;
                 }
-                double consensus = getConsensus(N, grid);
                 if (it % Math.pow(N, 2) == 0){
-                    writeOutput(grid, N, consensus, !cutCondition.test(it+1), fb);
+                    writeOutput(grid, N, !cutCondition.test(it+1), fb);
                 }
             }
         } catch (IOException e){
             throw new RuntimeException(e.getMessage());
         }
-
-        // double susceptibility = getSusceptibility(N, Mestationaries);
-
     }
 
     public static int getNeighbourOpinions(int col, int row, int N, int[][] grid){
@@ -102,15 +99,14 @@ public class MetropolisMethod {
             for (int j = 0; j < N; j++){
                 sb.append(grid[i][j]).append(' ');
             }
-            sb.append(" ]\n");
+            sb.append("]\n");
         }
         sb.append("]\n");
         return sb.toString();
     }
 
-    public static void writeOutput(int[][] grid, int N, double M, boolean last, FileWriter fb) throws IOException{
+    public static void writeOutput(int[][] grid, int N, boolean last, FileWriter fb) throws IOException{
         fb.append(gridToString(grid, N));
-        fb.append(String.valueOf(M));
         if (last){
             fb.append("end");
         } else {
