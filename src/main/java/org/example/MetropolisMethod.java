@@ -52,8 +52,9 @@ public class MetropolisMethod {
                     grid[randomPersonRow][randomPersonCol] = mayorityOpinion;
                 }
                 double consensus = getConsensus(N, grid);
-                //change later
-                writeOutput(grid, N, consensus, !cutCondition.test(it+1), fb);
+                if (it % Math.pow(N, 2) == 0){
+                    writeOutput(grid, N, consensus, !cutCondition.test(it+1), fb);
+                }
             }
         } catch (IOException e){
             throw new RuntimeException(e.getMessage());
