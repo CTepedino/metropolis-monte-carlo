@@ -70,27 +70,27 @@ public class MetropolisMethod {
         return (int) Math.signum((double)(opinionUp + opinionDown + opinionLeft + opinionRight));
     }
 
-    public static double getConsensus(int N, int[][] grid){
-        int sum = 0;
-        for (int i = 0; i < N; i++){
-            for (int j = 0; j < N; j++){
-                sum += grid[i][j];
-            }
-        }
-        return Math.abs(sum/(Math.pow(N, 2.0)));
-    }
-
-    public static double getSusceptibility(int N, double[] estacionaryM){
-        int medianM = 0;
-        int medianSquaredM = 0;
-        for (int i = 0; i < estacionaryM.length; i++){
-            medianM += estacionaryM[i];
-            medianSquaredM += Math.pow(estacionaryM[i], 2.0);
-        }
-        medianSquaredM /= estacionaryM.length;
-        medianM /= estacionaryM.length;
-        return Math.pow(N, 2.0) * (medianSquaredM - Math.pow(medianM, 2.0));
-    }
+//    public static double getConsensus(int N, int[][] grid){
+//        int sum = 0;
+//        for (int i = 0; i < N; i++){
+//            for (int j = 0; j < N; j++){
+//                sum += grid[i][j];
+//            }
+//        }
+//        return Math.abs(sum/(Math.pow(N, 2.0)));
+//    }
+//
+//    public static double getSusceptibility(int N, double[] estacionaryM){
+//        int medianM = 0;
+//        int medianSquaredM = 0;
+//        for (int i = 0; i < estacionaryM.length; i++){
+//            medianM += estacionaryM[i];
+//            medianSquaredM += Math.pow(estacionaryM[i], 2.0);
+//        }
+//        medianSquaredM /= estacionaryM.length;
+//        medianM /= estacionaryM.length;
+//        return Math.pow(N, 2.0) * (medianSquaredM - Math.pow(medianM, 2.0));
+//    }
 
     public static String gridToString(int[][] grid, int N){
         StringBuilder sb = new StringBuilder("[\n");
