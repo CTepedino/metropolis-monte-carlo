@@ -1,8 +1,8 @@
-import matplotlib
-import matplotlib.pyplot as plt
-import os
-import numpy as np
 import re
+
+import matplotlib.pyplot as plt
+import numpy as np
+
 
 def get_consensus(grid):
     N = grid.shape[0]

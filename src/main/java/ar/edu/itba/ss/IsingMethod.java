@@ -58,8 +58,8 @@ public class IsingMethod {
 
 
     public void execute(FileWriter fb) throws IOException {
-        fb.write(String.format("N: %d\n", N));
-        fb.write(String.format("p: %.2f\n\n", p));
+        fb.write(String.format("%d\n", N));
+        fb.write(String.format("%.2f\n", p));
 
         for (long monteCarloStep = 0; monteCarloStep < maxSteps; monteCarloStep++) {
             for (int i = 0; i < N * N; i++) {
@@ -93,15 +93,12 @@ public class IsingMethod {
     }
 
     private String gridToString(int[][] grid, int N){
-        StringBuilder sb = new StringBuilder("[\n");
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < N; i++){
-            sb.append("[ ");
             for (int j = 0; j < N; j++){
                 sb.append(grid[i][j]).append(' ');
             }
-            sb.append("]\n");
         }
-        sb.append("]\n");
         return sb.toString();
     }
 
