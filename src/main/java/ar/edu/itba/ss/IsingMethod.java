@@ -106,8 +106,8 @@ public class IsingMethod {
     }
 
     public void writeMonteCarloStepCount(long step, FileWriter fb) throws IOException {
-        fb.append(String.valueOf(step));
-        fb.append('\n');
+        //fb.append(String.valueOf(step));
+        //fb.append('\n');
         fb.append(gridToString(grid, N));
         if (step == maxSteps){
             fb.append("end");
