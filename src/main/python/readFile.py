@@ -1,6 +1,4 @@
-import sys
-
-
+import copy
 
 def readMatrix(f, N):
     matrix = []
@@ -12,16 +10,36 @@ def readMatrix(f, N):
         matrix.append(line)
     return matrix
 
+# def readFile(filename):
+#     state = []
+#     with open(filename, "r") as f:
+#         N = int(f.readline().strip())
+#         p = float(f.readline().strip())
+#
+#         state.append(readMatrix(f, N))
+#         next_iter = f.readline().strip()
+#         while next_iter != "end":
+#             state.append(readMatrix(f, N))
+#             next_iter = f.readline().strip()
+#
+#     return N, p, state
+
 def readFile(filename):
     state = []
     with open(filename, "r") as f:
         N = int(f.readline().strip())
         p = float(f.readline().strip())
+        step_count = int(f.readline().strip())
 
         state.append(readMatrix(f, N))
-        next_iter = f.readline().strip()
-        while next_iter != "end":
-            state.append(readMatrix(f, N))
-            next_iter = f.readline().strip()
+        for i in range(step_count):
+            next_matrix = copy.deepcopy(state[i])
+            while True:
+                line = f.readline().split()
+                if line[0] == "next" or line[0] == "end":
+                    break
+                row, col = line
+                next_matrix[int(row)][int(col)] = -1 * next_matrix[int(row)][int(col)]
+            state.append(next_matrix)
 
     return N, p, state

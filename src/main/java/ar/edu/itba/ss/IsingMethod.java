@@ -60,6 +60,9 @@ public class IsingMethod {
     public void execute(FileWriter fb) throws IOException {
         fb.write(String.format("%d\n", N));
         fb.write(String.format("%.2f\n", p));
+        fb.write(String.format("%d\n", maxSteps));
+
+        fb.write(gridToString());
 
         for (long monteCarloStep = 0; monteCarloStep < maxSteps; monteCarloStep++) {
             for (int i = 0; i < N * N; i++) {
@@ -72,13 +75,23 @@ public class IsingMethod {
                     majorityOpinion = grid[randomPersonRow][randomPersonCol];
                 }
 
+                int prevValue = grid[randomPersonRow][randomPersonCol];
+
                 if (random.nextDouble() < p) {
                     grid[randomPersonRow][randomPersonCol] = -grid[randomPersonRow][randomPersonCol];
                 } else {
                     grid[randomPersonRow][randomPersonCol] = majorityOpinion;
                 }
+
+                if (prevValue != grid[randomPersonRow][randomPersonCol]){
+                    fb.write(String.format("%d %d\n", randomPersonRow, randomPersonCol));
+                }
             }
-            writeMonteCarloStepCount(monteCarloStep+1, fb);
+            if (monteCarloStep != maxSteps - 1){
+                fb.write("next\n");
+            } else {
+                fb.write("end");
+            }
         }
 
     }
@@ -92,7 +105,7 @@ public class IsingMethod {
         return (int) Math.signum((double)(opinionUp + opinionDown + opinionLeft + opinionRight));
     }
 
-    private String gridToString(int[][] grid, int N){
+    private String gridToString(){
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < N; i++){
             for (int j = 0; j < N; j++){
@@ -103,14 +116,4 @@ public class IsingMethod {
         return sb.toString();
     }
 
-    public void writeMonteCarloStepCount(long step, FileWriter fb) throws IOException {
-        //fb.append(String.valueOf(step));
-        //fb.append('\n');
-        fb.append(gridToString(grid, N));
-        if (step == maxSteps){
-            fb.append("end");
-        } else {
-            fb.append("next\n");
-        }
-    }
 }
