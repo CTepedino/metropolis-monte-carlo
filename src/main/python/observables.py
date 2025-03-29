@@ -1,10 +1,12 @@
 import sys
 from readFile import readFile
 from analysis import plot_consensus_evolution
+from src.main.python.readFile import startIterator, nextGrid, closeIterator
 
-def magnetization(N: int, state, t: int):
+
+def magnetization(N: int, grid: [[int]]):
     grid_sum = 0
-    for row in state[t]:
+    for row in grid:
         for s in row:
             grid_sum += s
 
@@ -16,10 +18,14 @@ if __name__ == "__main__":
     else:
         results_file = "output.txt"
 
-    N, p, state = readFile(results_file)
+    N, p, steps, grid = startIterator(results_file)
 
     magnetization_list = []
-    for i, grid in enumerate(state):
-        magnetization_list.append(magnetization(N, state, i))
+
+    for i in range(steps-1):
+        magnetization_list.append(magnetization(N, grid))
+        grid = nextGrid(grid)
+
+    closeIterator()
 
     plot_consensus_evolution(magnetization_list, N, p)
