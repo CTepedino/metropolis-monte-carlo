@@ -32,6 +32,6 @@ if __name__ == "__main__":
         title.set_text(f"monte carlo step {frame}")
         return cax, title
 
-    ani = animation.FuncAnimation(fig, update, frames=len(grids), interval=1000, blit=False)
+    ani = animation.FuncAnimation(fig, update, frames=len(grids), interval=1, blit=False)
 
     plt.show()

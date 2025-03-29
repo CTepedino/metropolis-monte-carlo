@@ -1,8 +1,8 @@
 import sys
 from readFile import readFile
+from analysis import plot_consensus_evolution
 
-
-def magnetization(N, state, t):
+def magnetization(N: int, state, t: int):
     grid_sum = 0
     for row in state[t]:
         for s in row:
@@ -18,7 +18,8 @@ if __name__ == "__main__":
 
     N, p, state = readFile(results_file)
 
-    for i in range(100):
-        print(magnetization(N, state, i))
+    magnetization_list = []
+    for i, grid in enumerate(state):
+        magnetization_list.append(magnetization(N, state, i))
 
-
+    plot_consensus_evolution(magnetization_list, N, p)
