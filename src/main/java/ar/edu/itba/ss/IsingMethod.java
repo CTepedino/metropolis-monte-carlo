@@ -49,7 +49,7 @@ public class IsingMethod {
         }
 
         IsingMethod method = new IsingMethod(N, p, mcSteps, random);
-        try (FileWriter fb = new FileWriter("output.txt")) {
+        try (FileWriter fb = new FileWriter(outputFileName)) {
             method.execute(fb);
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
