@@ -98,6 +98,7 @@ public class IsingMethod {
             for (int j = 0; j < N; j++){
                 sb.append(grid[i][j]).append(' ');
             }
+            sb.append('\n');
         }
         return sb.toString();
     }

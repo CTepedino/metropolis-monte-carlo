@@ -1,12 +1,14 @@
 import sys
+from readFile import readFile
 
 
-def readMatrix(f, N):
-    f.readline().strip()
+def magnetization(N, state, t):
+    grid_sum = 0
+    for row in state[t]:
+        for s in row:
+            grid_sum += s
 
-    values = f.readline().split()
-
-
+    return abs(grid_sum/(N**2))
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
@@ -14,14 +16,9 @@ if __name__ == "__main__":
     else:
         results_file = "output.txt"
 
-    state = []
-    with open(results_file, "r") as f:
-        N = int(f.readline().strip())
-        p = float(f.readline().strip())
+    N, p, state = readFile(results_file)
 
-        state.append(readMatrix(f, N))
-
-    print(N)
-    print(p)
+    for i in range(100):
+        print(magnetization(N, state, i))
 
 
