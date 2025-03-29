@@ -78,14 +78,14 @@ public class IsingMethod {
                     grid[randomPersonRow][randomPersonCol] = majorityOpinion;
                 }
             }
-            writeMonteCarloStepCount(monteCarloStep, fb);
+            writeMonteCarloStepCount(monteCarloStep+1, fb);
         }
 
     }
 
     public int getNeighbourOpinions(int row, int col) {
-        int opinionDown = grid[row > 0? row-1: N-1][col];
-        int opinionUp = grid[(row+1)%N][col];
+        int opinionUp = grid[row > 0? row-1: N-1][col];
+        int opinionDown = grid[(row+1)%N][col];
         int opinionLeft = grid[row][col > 0? col-1: N-1];
         int opinionRight = grid[row][(col+1)%N];
 
