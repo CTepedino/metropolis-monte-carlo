@@ -4,7 +4,7 @@ import numpy as np
 
 import matplotlib
 
-from src.main.python.readFile import readFile
+from readFile import readFile
 
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt

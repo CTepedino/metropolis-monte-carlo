@@ -14,7 +14,7 @@ def plot_consensus_evolution(consensus_list, n, p):
     m_values = consensus_list
 
     plt.figure(figsize=(10, 6))
-    plt.scatter(steps, m_values)
+    plt.scatter(steps, m_values, marker='o', s=1)  # Changed to scatter plot
     plt.title(f'Evolución temporal del Consenso (M) en pasos de Monte Carlo para N = {n} y p = {p}')
     plt.xlabel('Cantidad de pasos de Monte Carlo')
     plt.ylabel('M')
@@ -23,4 +23,3 @@ def plot_consensus_evolution(consensus_list, n, p):
     output_path = os.path.join('observables', 'consensus_evolution.png')
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.close()
-    
