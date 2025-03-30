@@ -1,7 +1,7 @@
 import sys
 from readFile import readFile
 from analysis import plot_consensus_evolution
-from src.main.python.readFile import startIterator, nextGrid, closeIterator
+from readFile import startIterator, nextGrid, closeIterator
 
 
 def magnetization(N: int, grid: [[int]]):
