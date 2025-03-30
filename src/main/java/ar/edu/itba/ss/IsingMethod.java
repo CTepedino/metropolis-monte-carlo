@@ -2,8 +2,7 @@ package ar.edu.itba.ss;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Random;
 
 public class IsingMethod {
 
@@ -60,43 +59,33 @@ public class IsingMethod {
 
     public void execute(FileWriter fb) throws IOException {
         fb.write(String.format("%d\n", N));
-        fb.write(String.format(Locale.US,"%.2f\n", p));
+        fb.write(String.format("%.2f\n", p));
         fb.write(String.format("%d\n", maxSteps));
 
         fb.write(gridToString());
 
-        HashMap<String, Boolean> matrixChanges = new HashMap<>();
         for (long monteCarloStep = 0; monteCarloStep < maxSteps; monteCarloStep++) {
             for (int i = 0; i < N * N; i++) {
 
                 int randomPersonRow = random.nextInt(0, N);
                 int randomPersonCol = random.nextInt(0, N);
-                boolean prevValue = matrixChanges.getOrDefault(String.format("%d %d", randomPersonRow, randomPersonCol), false);
-                if (random.nextDouble() < p) {
-                    // grid[randomPersonRow][randomPersonCol] = -grid[randomPersonRow][randomPersonCol];
-                    matrixChanges.put(String.format("%d %d", randomPersonRow, randomPersonCol), !prevValue);
-                }else{
-                    int majorityOpinion = getNeighbourOpinions(randomPersonRow, randomPersonCol);
-                    if (majorityOpinion == 0) {
-                        continue;
-                    }
-                    //int prevValue = grid[randomPersonRow][randomPersonCol];
-                    if (majorityOpinion != grid[randomPersonRow][randomPersonCol]){
-                        matrixChanges.put(String.format("%d %d", randomPersonRow, randomPersonCol), !prevValue);
-                    }
-                }
-               // else {
-               //     continue;
-               //     grid[randomPersonRow][randomPersonCol] = majorityOpinion;
-               // }
 
-                //if (prevValue != grid[randomPersonRow][randomPersonCol]){
-                //    fb.write(String.format("%d %d\n", randomPersonRow, randomPersonCol));
-                //}
-            }
-            List<Map.Entry<String, Boolean>> changes = matrixChanges.entrySet().stream().filter(Map.Entry::getValue).toList();
-            for (Map.Entry<String, Boolean> change : changes){
-                fb.write(String.format("%s\n",change.getKey()));
+                int majorityOpinion = getNeighbourOpinions(randomPersonRow, randomPersonCol);
+                if (majorityOpinion == 0) {
+                    majorityOpinion = grid[randomPersonRow][randomPersonCol];
+                }
+
+                int prevValue = grid[randomPersonRow][randomPersonCol];
+
+                if (random.nextDouble() < p) {
+                    grid[randomPersonRow][randomPersonCol] = -grid[randomPersonRow][randomPersonCol];
+                } else {
+                    grid[randomPersonRow][randomPersonCol] = majorityOpinion;
+                }
+
+                if (prevValue != grid[randomPersonRow][randomPersonCol]){
+                    fb.write(String.format("%d %d\n", randomPersonRow, randomPersonCol));
+                }
             }
             if (monteCarloStep != maxSteps - 1){
                 fb.write("next\n");
