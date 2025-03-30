@@ -74,14 +74,13 @@ public class IsingMethod {
                 int randomPersonRow = random.nextInt(0, N);
                 int randomPersonCol = random.nextInt(0, N);
 
-                int majorityOpinion = getNeighbourOpinions(randomPersonRow, randomPersonCol);
-                if (majorityOpinion == 0) {
-                    majorityOpinion = grid[randomPersonRow][randomPersonCol];
-                }
-
                 if (random.nextDouble() < p) {
                     grid[randomPersonRow][randomPersonCol] = -grid[randomPersonRow][randomPersonCol];
                 } else {
+                    int majorityOpinion = getNeighbourOpinions(randomPersonRow, randomPersonCol);
+                    if (majorityOpinion == 0) {
+                        majorityOpinion = grid[randomPersonRow][randomPersonCol];
+                    }
                     grid[randomPersonRow][randomPersonCol] = majorityOpinion;
                 }
             }
