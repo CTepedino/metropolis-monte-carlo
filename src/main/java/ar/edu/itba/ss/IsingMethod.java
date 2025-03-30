@@ -65,8 +65,12 @@ public class IsingMethod {
         fb.write(gridToString());
 
         for (long monteCarloStep = 0; monteCarloStep < maxSteps; monteCarloStep++) {
-            for (int i = 0; i < N * N; i++) {
+            int[][] previousGrid = new int[N][N];
+            for (int i = 0; i < N; i++) {
+                System.arraycopy(grid[i], 0, previousGrid[i], 0, N);
+            }
 
+            for (int i = 0; i < N * N; i++) {
                 int randomPersonRow = random.nextInt(0, N);
                 int randomPersonCol = random.nextInt(0, N);
 
@@ -75,25 +79,27 @@ public class IsingMethod {
                     majorityOpinion = grid[randomPersonRow][randomPersonCol];
                 }
 
-                int prevValue = grid[randomPersonRow][randomPersonCol];
-
                 if (random.nextDouble() < p) {
                     grid[randomPersonRow][randomPersonCol] = -grid[randomPersonRow][randomPersonCol];
                 } else {
                     grid[randomPersonRow][randomPersonCol] = majorityOpinion;
                 }
+            }
 
-                if (prevValue != grid[randomPersonRow][randomPersonCol]){
-                    fb.write(String.format("%d %d\n", randomPersonRow, randomPersonCol));
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    if (previousGrid[i][j] != grid[i][j]) {
+                        fb.write(String.format("%d %d\n", i, j));
+                    }
                 }
             }
-            if (monteCarloStep != maxSteps - 1){
+
+            if (monteCarloStep != maxSteps - 1) {
                 fb.write("next\n");
             } else {
                 fb.write("end");
             }
         }
-
     }
 
     public int getNeighbourOpinions(int row, int col) {
