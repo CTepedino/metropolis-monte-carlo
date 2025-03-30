@@ -71,22 +71,16 @@ public class IsingMethod {
 
                 int randomPersonRow = random.nextInt(0, N);
                 int randomPersonCol = random.nextInt(0, N);
-
-                int majorityOpinion = getNeighbourOpinions(randomPersonRow, randomPersonCol);
-                if (majorityOpinion == 0) {
-                    //majorityOpinion = grid[randomPersonRow][randomPersonCol];
-                    // i don't want to change anything
-                    continue;
-                }
-
-                //int prevValue = grid[randomPersonRow][randomPersonCol];
-                //if there is no entry then it's the first step
                 boolean prevValue = matrixChanges.getOrDefault(String.format("%d %d", randomPersonRow, randomPersonCol), false);
                 if (random.nextDouble() < p) {
                     // grid[randomPersonRow][randomPersonCol] = -grid[randomPersonRow][randomPersonCol];
                     matrixChanges.put(String.format("%d %d", randomPersonRow, randomPersonCol), !prevValue);
-                }
-                else{
+                }else{
+                    int majorityOpinion = getNeighbourOpinions(randomPersonRow, randomPersonCol);
+                    if (majorityOpinion == 0) {
+                        continue;
+                    }
+                    //int prevValue = grid[randomPersonRow][randomPersonCol];
                     if (majorityOpinion != grid[randomPersonRow][randomPersonCol]){
                         matrixChanges.put(String.format("%d %d", randomPersonRow, randomPersonCol), !prevValue);
                     }
