@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
+import os
 
 def read_data(file_path):
     """
@@ -31,9 +32,10 @@ def plot_data(probabilities, means, stds):
     plt.plot(probabilities, means, linestyle='-', color='blue')
     plt.xlabel('Probablidad')
     plt.ylabel('Susceptibilidad')
-    plt.grid(True)
-    plt.legend()
-    plt.show()
+    plt.grid(True, linestyle='--', alpha=0.7)
+    output_path = os.path.join('observables', f'susceptibility_from_{probabilities[0]}_to_{probabilities[-1]}.png')
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.close()
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
