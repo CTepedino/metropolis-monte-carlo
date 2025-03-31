@@ -1,6 +1,6 @@
 import sys
-from readFile import readFile
-from analysis import plot_consensus_evolution
+
+from consensusGraph import plot_consensus_evolution
 from readFile import startIterator, nextGrid, closeIterator
 
 
