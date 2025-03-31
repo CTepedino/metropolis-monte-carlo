@@ -1,8 +1,4 @@
-import sys
-
-from consensusGraph import plot_consensus_evolution
-from readFile import startIterator, nextGrid, closeIterator
-
+import numpy as np
 
 def magnetization(N: int, grid: [[int]]):
     grid_sum = 0
@@ -12,26 +8,19 @@ def magnetization(N: int, grid: [[int]]):
 
     return abs(grid_sum/(N**2))
 
-def steady_magnetization_mean(consensus_list: [int], minimal_value: float):
-    steady_sum = 0 
-    n = 0
-    for m in consensus_list:
-        if m >= minimal_value:
-            n += 1
-            steady_sum += m
-        
-    return steady_sum/n
 
-def steady_squared_magnetization_mean(consensus_list: [int], minimal_value: float):
-    steady_sum = 0 
-    n = 0
-    for m in consensus_list:
-        if m >= minimal_value:
-            n += 1
-            steady_sum += m ** 2
-        
-    return steady_sum/n
+def magnetization_mean(magnetization_list):
+    return np.mean(magnetization_list), np.std(magnetization_list)
 
+def magnetization_squared_mean(magnetization_list):
+    magnetization_squared_list = list(map(lambda x: x**2, magnetization_list))
+    return np.mean(magnetization_squared_list), np.std(magnetization_squared_list)
 
-def susceptibility(N: int, consensus_list: [int], minimal_value: float):
-    return (N ** 2) * (steady_squared_magnetization_mean(consensus_list, minimal_value) - (steady_magnetization_mean(consensus_list, minimal_value) ** 2))
+def susceptibility(N, magnetization_list):
+    m_mean, m_std = magnetization_mean(magnetization_list)
+    m_2_mean, m_2_std = magnetization_squared_mean(magnetization_list)
+
+    sus = (N**2) * (m_2_mean - (m_mean ** 2))
+    sus_std = (N**2) * np.sqrt(m_2_std**2 + (2 * m_mean * m_std) ** 2)
+    return sus, sus_std
+
