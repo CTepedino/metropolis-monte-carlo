@@ -24,3 +24,4 @@ def susceptibility(N, magnetization_list):
     sus_std = (N**2) * np.sqrt(m_2_std**2 + (2 * m_mean * m_std) ** 2)
     return sus, sus_std
 
+
