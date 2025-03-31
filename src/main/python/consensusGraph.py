@@ -4,7 +4,7 @@ import sys
 import matplotlib.pyplot as plt
 
 import observables
-from src.main.python.readFile import startIterator, nextGrid, closeIterator
+from readFile import startIterator, nextGrid, closeIterator
 
 
 def plot_consensus_evolution(consensus_list, n, p):
@@ -18,7 +18,7 @@ def plot_consensus_evolution(consensus_list, n, p):
     plt.figure(figsize=(10, 6))
     plt.scatter(steps, m_values, marker='o', s=1)
     plt.xlabel('Paso de Monte Carlo')
-    plt.ylabel('M')
+    plt.ylabel('Consenso')
     plt.grid(True, linestyle='--', alpha=0.7)
 
     plt.yticks([0, 0.2, 0.4, 0.6, 0.8, 1])
