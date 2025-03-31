@@ -59,7 +59,7 @@ public class IsingMethod {
 
     public void execute(FileWriter fb) throws IOException {
         fb.write(String.format("%d\n", N));
-        fb.write(String.format("%.2f\n", p));
+        fb.write(String.format("%.6f\n", p));
         fb.write(String.format("%d\n", maxSteps));
 
         fb.write(gridToString());
