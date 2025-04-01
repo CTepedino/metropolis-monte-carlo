@@ -2,6 +2,7 @@ package ar.edu.itba.ss;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Random;
 
 public class IsingMethod {
@@ -59,7 +60,7 @@ public class IsingMethod {
 
     public void execute(FileWriter fb) throws IOException {
         fb.write(String.format("%d\n", N));
-        fb.write(String.format("%.6f\n", p));
+        fb.write(String.format(Locale.US,"%.6f\n", p));
         fb.write(String.format("%d\n", maxSteps));
 
         fb.write(gridToString());
