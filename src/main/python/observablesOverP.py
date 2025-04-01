@@ -37,8 +37,8 @@ if __name__ == "__main__":
     for p in all_probabilities:
         for n in all_numbers:
             with open(f"magnetization_p_{p}_n_{n}.txt", "w") as f1:
-                magnetization_mean, magnetization_std = magnetization_mean_mean_and_std(p)
-                f1.write(f"{p} {magnetization_mean} {magnetization_std}")
+                magnetization_mean_result, magnetization_std = magnetization_mean_mean_and_std(p)
+                f1.write(f"{p} {magnetization_mean_result} {magnetization_std}")
             with open(f"susceptibility_p_{p}_n_{n}.txt", "w") as f2:
-                susceptibility_mean, susceptibility_std = susceptibility_mean_and_std(p)
-                f2.write(f"{p} {susceptibility_mean} {susceptibility_std}")
+                susceptibility_mean_result, susceptibility_std = susceptibility_mean_and_std(p)
+                f2.write(f"{p} {susceptibility_mean_result} {susceptibility_std}")
