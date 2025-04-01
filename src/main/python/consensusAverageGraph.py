@@ -44,8 +44,17 @@ if __name__ == "__main__":
     else:
         file_path = "data.txt"
     
+    all_probabilities = [0.2, 0.15, 0.125, 0.1125, 0.10625, 0.01, 0.05, 0.075, 0.0875, 0.09375, 0.096875]
+    all_numbers = [50]
+
+    for p in all_probabilities:
+        for n in all_numbers:
+            file_path = f"magnetization_p_{p}_n_{n}.txt"
+            probabilities, means, stds = read_data(file_path)
+            plot_data(probabilities, means, stds)
+    
     # Read the data from the file
-    probabilities, means, stds = read_data(file_path)
+    #probabilities, means, stds = read_data(file_path)
     
     # Plot the data
-    plot_data(probabilities, means, stds)
+    #plot_data(probabilities, means, stds)

@@ -3,8 +3,7 @@ import sys
 import numpy as np
 
 from observables import magnetization_mean, magnetization, susceptibility
-from src.main.python.readFile import readFile
-
+from readFile import readFile
 
 def magnetization_mean_mean_and_std(p):
     magnetization_means = []
@@ -32,7 +31,14 @@ def susceptibility_mean_and_std(p):
     return np.mean(susceptibilities), np.std(susceptibilities)
 
 if __name__ == "__main__":
-    p = 0.05
+    all_probabilities = [0.2, 0.15, 0.125, 0.1125, 0.10625, 0.01, 0.05, 0.075, 0.0875, 0.09375, 0.096875]
+    all_numbers = [50]
 
-    print(magnetization_mean_mean_and_std(p))
-    print(susceptibility_mean_and_std(p))
+    for p in all_probabilities:
+        for n in all_numbers:
+            with open(f"magnetization_p_{p}_n_{n}.txt", "w") as f1:
+                magnetization_mean, magnetization_std = magnetization_mean_mean_and_std(p)
+                f1.write(f"{p} {magnetization_mean} {magnetization_std}")
+            with open(f"susceptibility_p_{p}_n_{n}.txt", "w") as f2:
+                susceptibility_mean, susceptibility_std = susceptibility_mean_and_std(p)
+                f2.write(f"{p} {susceptibility_mean} {susceptibility_std}")
