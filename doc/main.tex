@@ -1,0 +1,134 @@
+\UseRawInputEncoding
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage{float}
+\usepackage{indentfirst}
+\usepackage{colortbl}
+\usepackage{wrapfig}
+\usepackage{csvsimple}
+\usepackage[normalem]{ulem}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{vmargin}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{hhline}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{graphicx} 
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancyvrb}
+\usepackage{times}
+
+\newcommand{\keyword}[1]{\textcolor{blue}{\textbf{#1}}}
+
+
+\setpapersize{A4}
+\setmargins{2.5cm}      % margen izquierdo
+{1.5cm}                 % margen superior
+{16.5cm}                % anchura del texto
+{23.42cm}               % altura del texto
+{10pt}                  % altura de los encabezados
+{1cm}                   % espacio entre el texto y los encabezados
+{0pt}                   % altura del pie de página
+{2cm}
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{1em}
+
+\usepackage{titlesec}
+
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@subparagraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+
+{\includegraphics[width=0.4\textwidth]{itba-1.png}\par}
+\vspace{1cm}
+{\bfseries\LARGE Instituto Tecnológico de Buenos Aires \par}
+\vspace{0.5cm}
+{\scshape\Huge\underline {T.P. 2: Autómatas celulares} \par}
+\vspace{0.4cm}
+{\Large\itshape 72.25 - Simulación de Sistemas  \par}
+\end{center}
+\vfill
+
+{\Large Integrantes \par}
+\centering
+{\Large Tepedino, Cristian - 62830 \par}
+{\Large Bloise, Luca - 63004 \par}
+{\Large Arias, Uriel Ángel - 63504 \par}
+
+\vfill
+{\Large\itshape Primer Cuatrimestre del 2025 \par}
+\end{titlepage}
+
+\setcounter{page}{0}
+\tableofcontents
+\clearpage
+
+\section{Introducción}
+En el siguiente informe se mostrarán los resultados de simular un modelo de Ising bidimensional para representar la opinión de un grupo de diferentes personas a través del tiempo en función de diferentes condiciones iniciales.
+
+\section{Modelo de Ising}
+El modelo de Ising es una red de spines que pueden apuntar hacia arriba o
+hacia abajo. La red puede tener cualquier número de dimensiones y puede ser
+de cualquier tipo (cuadrada, hexagonal, etc). En este caso, al ser cuadrada se cuenta con una grilla de dimensión $N$ donde cada spin viene a representar la opinión particular de una persona. De esta manera, dada una configuración inicial de opiniones y un probabilidad de cambio de opinión, se puede calcular el cambio de estado de cada individuo luego de verificar el estado de sus vecinos adyacentes. Este proceso se repite considerando un periodo elegido, que en particular para este trabajo fue el de un paso de Montercarlo que corresponde a $N^{2}$ actualizaciones individuales.
+
+A partir de la recolección de los estados obtenidos, luego de una cantidad de pasos considerable, es posible tomar métricas que reflejen los cambios producidos, dentro de las cuales se encuentran el consenso y la susceptibilidad.
+
+El consenso se define formalmente como:
+    $$M(t)=|{\frac{1}{N^{2}}}\sum_{i,j}S_{i,j}(t)|$$
+
+La susceptibilidad se define formalmente como:
+    $$\chi=N^{2}\left(\langle M^{2}\rangle-\langle M\rangle^{2}\right$)$$
+
+\section{Implementación}
+
+
+\section{Simulaciones}
+
+\section{Resultados}
+
+\section{Conclusiones}
+
+\end{document}
