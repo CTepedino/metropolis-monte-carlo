@@ -32,8 +32,6 @@ def plot_data(probabilities, means, stds, scalar):
     plt.scatter(probabilities, means, color='blue')
     plt.xlabel('Probablidad')
     plt.ylabel(f'{scalar} Promedio')
-    plt.yticks([0, 0.2, 0.4, 0.6, 0.8, 1])
-    plt.grid(True, linestyle='--', alpha=0.7)
     output_path = os.path.join('observables', f'{scalar}_average_from_{probabilities[0]}_to_{probabilities[-1]}.png')
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.close()
@@ -44,7 +42,7 @@ if __name__ == "__main__":
     else:
         file_path = "data.txt"
     
-    all_probabilities = [0.2, 0.15, 0.125, 0.1125, 0.10625, 0.01, 0.05, 0.075, 0.0875, 0.09375, 0.096875]
+    all_probabilities = [0.01, 0.05, 0.075, 0.0875, 0.09375, 0.096875, 0.10625, 0.1125, 0.125, 0.15, 0.2]
     all_numbers = [50]
     scalars = ["magnetization", "susceptibility"]
     magnetization_means = []
