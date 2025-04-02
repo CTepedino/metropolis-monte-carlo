@@ -46,7 +46,7 @@ if __name__ == "__main__":
     
     all_probabilities = [0.2, 0.15, 0.125, 0.1125, 0.10625, 0.01, 0.05, 0.075, 0.0875, 0.09375, 0.096875]
     all_numbers = [50]
-    scalars = ["consensus", "susceptibility"]
+    scalars = ["magnetization", "susceptibility"]
 
     for p in all_probabilities:
         for n in all_numbers:
