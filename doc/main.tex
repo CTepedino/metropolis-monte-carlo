@@ -112,9 +112,9 @@ En el siguiente informe se mostrarán los resultados de simular un modelo de Isi
 \section{Modelo de Ising}
 El modelo de Ising es una red de spines que pueden apuntar hacia arriba o
 hacia abajo. La red puede tener cualquier número de dimensiones y puede ser
-de cualquier tipo (cuadrada, hexagonal, etc). En este caso, al ser cuadrada se cuenta con una grilla de dimensión $N$ donde cada spin viene a representar la opinión particular de una persona. De esta manera, dada una configuración inicial de opiniones y una probabilidad de cambio de opinión, se puede calcular el cambio de estado de cada individuo luego de verificar el estado de sus vecinos adyacentes. Para esto se sigue el siguiente algoritmo:
+de cualquier tipo (cuadrada, hexagonal, etc.). En este caso, al ser cuadrada se cuenta con una grilla de dimensión $N$ donde cada spin viene a representar la opinión particular de una persona. De esta manera, dada una configuración inicial de opiniones y una probabilidad de cambio de estado oponiéndose a la opinión de la mayoría, se puede calcular el cambio de estado de cada individuo luego de verificar el estado de sus vecinos adyacentes. Para esto se sigue el siguiente algoritmo:
 
-Considerando una Grilla cuadrada de N x N (Con Condiciones Periódicas de Contomo).
+Considerando una Grilla cuadrada de N x N (Con Condiciones Periódicas de Contorno).
 Cada Sitio representa un individuo con dos posibles $S_{ij}\pm1$
 
 Evolución:
@@ -122,7 +122,7 @@ Evolución:
 - Elegir un sitio (i. j) al azar.
 - Calcular el signo de la suma de los 4 vecinos: $$sign(S_{i-1 j}\!+\!S_{i+1j}\!+\!S_{i j-1}\!+\!S_{i j+1})$$
 
-    - Si es distinto de cero, entonces la opinión de la mayoria es:
+    - Si es distinto de cero, entonces la opinión de la mayoría es:
 $$O_{M}=sign(S_{i-1 j}\!+\!S_{i+1j}\!+\!S_{i j-1}\!+\!S_{i j+1})$$
 
     - Sino:
@@ -133,7 +133,7 @@ $$O_{M}=S_{ij}$$
 - Con probabilidad p cambiar el estado del Sitio: $$S\space^\prime_{ij}=-S_{ij}$$
 
 
-Este proceso se repite considerando un periodo elegido, que en particular para este trabajo fue el de un paso de Montercarlo que corresponde a $N^{2}$ actualizaciones individuales.
+Este proceso se repite considerando un periodo elegido, que en particular para este trabajo fue el de un paso de Montecarlo que corresponde a $N^{2}$ actualizaciones individuales.
 
 A partir de la recolección de los estados obtenidos, luego de una cantidad de pasos considerable, es posible tomar métricas que reflejen los cambios producidos, dentro de las cuales se encuentran el consenso y la susceptibilidad.
 
@@ -144,13 +144,25 @@ La susceptibilidad se define formalmente como:
     $$\chi=N^{2}\left(\langle M^{2}\rangle-\langle M\rangle^{2}\right)$$
 
 \section{Implementación}
-\subsection{Condiciones Iniciales}
-Para poder realizar múltiples simulaciones con condiciones iniciales distintas se realizó una implementación parametrizada por medio de las propiedades del sistema que están disponibles en Java. De este modo, se pueden pasar los valores correspondientes a las siguientes propiedades: "n" (referido como $N$ en el modelo), "p", "mcSteps" (número de pasos de Montecarlo a completar), "seed" (valor utilizado para inicializar la clase que se encarga de generar números pseudoaleatorios para los pasos del proceso) y "output" (nombre del archivo de salida con el resultado de la simulación). Resulta relevante aclarar que solo para los casos de "n" y "p" se requiere algún valor especificado, el resto de las propiedades son opcionales dado que por defecto se correrá la simulación hasta que se envíe una señal para interrumpir al proceso, se usará una seed aleatoria desconocida y se escribirán los resultados de la simulación en un archivo de nombre "output.txt".
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{uml_ising_method.JPG} 
+    \caption{Diagrama UML para la clase IsingMethod}
+    \label{fig:example}
+\end{figure}
 
-Considerando que se utilizó una red cuadrada representada por medio de una matriz, o de forma más rigurosa, un arreglo de arreglos, se decidió inicializar las posiciones iniciales de la misma con valores pseudoaleatorios. Para esto, valiéndose de la implementación provista por la clase Random de java.util, se obtiene un valor booleano que se traduce en alguno de los dos valores posibles para cada posición.
+\subsection{Condiciones Iniciales}
+Para poder realizar múltiples simulaciones con condiciones iniciales distintas se realizó una implementación parametrizada por medio de las propiedades del sistema que están disponibles en Java. De este modo, se pueden pasar los valores correspondientes a las siguientes propiedades: 'n' (referido como $N$ en el modelo), 'p', 'mcSteps' (número de pasos de Montecarlo a completar), 'seed' (valor utilizado para inicializar la clase que se encarga de generar números pseudoaleatorios para los pasos del proceso) y 'output' (nombre del archivo de salida con el resultado de la simulación). Resulta relevante aclarar que solo para los casos de 'n' y 'p' se requiere algún valor especificado, el resto de las propiedades son opcionales dado que por defecto se corre la simulación hasta que se envíe una señal para interrumpir al proceso, se usa una seed aleatoria desconocida y se escriben los resultados de la simulación en un archivo de nombre 'output.txt'.
+
+Considerando que se utilizó una red cuadrada representada por medio de una matriz, o de forma más rigurosa, un arreglo de arreglos, se decidió inicializar las posiciones iniciales de la misma con valores pseudoaleatorios. Para esto, valiéndose de la implementación provista por la clase Random de java.util, se obtiene un valor booleano que se traduce en alguno de los dos valores posibles para cada posición. Este proceso se lleva a cabo dentro del constructor de la clase $IsingMethod$
 
 \subsection{Evolución del modelo}
+Habiendo definido la matriz inicial, se pone en marcha la simulación llamando al método $execute(FileWriter)$ que se encarga de ejecutar el algoritmo explicado en la sección anterior hasta la condición definida por los parámetros iniciales. A su vez, se encarga de imprimir el resultado de la simulación en un archivo de salida, el cual se inicia con los valores de los parámetros $N$, $p$ y $maxSteps$ junto con la matriz inicial que se imprime llamando al método $gridToString()$ de manera tal que cada fila se imprime en orden con todos los valores separados por un espacio en blanco.
 
+A propósito de la implementación del algoritmo, el método $getNeighbourOpinions(int, int)$ se encarga de calcular la opinión de la mayoría de los vecinos para una celda especificada por medio del índice de fila y columna que se pasan por parámetro. En este método se tienen en cuenta las condiciones periódicas de contorno al momento de calcular cuáles son las posiciones que se requieren revisar como parte de las celdas vecinas. 
+
+\subsection{Salida}
+Luego de cada paso de Montecarlo se imprimen las posiciones de las celdas que cambiaron de estado respecto del paso anterior, indicándose en cada línea el índice de la fila y la columna de la celda. A continuación en una nueva línea se encuentra la palabra 'next' o 'end' que indica si hay o no un siguiente paso en la simulación ejecutada.
 
 \section{Simulaciones}
 
