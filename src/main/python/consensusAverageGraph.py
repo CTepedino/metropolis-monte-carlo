@@ -21,7 +21,7 @@ def read_data(file_path):
     
     return probabilities, means, stds
 
-def plot_data(probabilities, means, stds):
+def plot_data(probabilities, means, stds, scalar):
     """
     Creates a scatter plot with error bars.
     X-axis: probabilities (p)
@@ -31,10 +31,10 @@ def plot_data(probabilities, means, stds):
     plt.errorbar(probabilities, means, yerr=stds, fmt='o', ecolor='black', capsize=5, markersize=10)
     plt.plot(probabilities, means, linestyle='-', color='blue')
     plt.xlabel('Probablidad')
-    plt.ylabel('Consenso Promedio')
+    plt.ylabel(f'{scalar} Promedio')
     plt.yticks([0, 0.2, 0.4, 0.6, 0.8, 1])
     plt.grid(True, linestyle='--', alpha=0.7)
-    output_path = os.path.join('observables', f'consensus_average_from_{probabilities[0]}_to_{probabilities[-1]}.png')
+    output_path = os.path.join('observables', f'{scalar}_average_from_{probabilities[0]}_to_{probabilities[-1]}.png')
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.close()
 
@@ -46,12 +46,14 @@ if __name__ == "__main__":
     
     all_probabilities = [0.2, 0.15, 0.125, 0.1125, 0.10625, 0.01, 0.05, 0.075, 0.0875, 0.09375, 0.096875]
     all_numbers = [50]
+    scalars = ["consensus", "susceptibility"]
 
     for p in all_probabilities:
         for n in all_numbers:
-            file_path = f"magnetization_p_{p}_n_{n}.txt"
-            probabilities, means, stds = read_data(file_path)
-            plot_data(probabilities, means, stds)
+            for scalar in scalars:
+                file_path = f"{scalar}_p_{p}_n_{n}.txt"
+                probabilities, means, stds = read_data(file_path)
+                plot_data(probabilities, means, stds, scalar)
     
     # Read the data from the file
     #probabilities, means, stds = read_data(file_path)
