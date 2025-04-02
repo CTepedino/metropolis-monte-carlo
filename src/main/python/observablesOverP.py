@@ -20,19 +20,12 @@ def magnetization_mean_mean_and_std(p):
 
 def susceptibility_mean_and_std(p, N, magnetization_list):
     susceptibilities = []
-
-    #for i in range(36, 46):
-        #magnetization_list = []
-        #N, p, grids = readFile(f"outs/p_{p:.6f}_s_{i}")
-        #for g in grids:
-            #magnetization_list.append(magnetization(N, g))
     susceptibilities.append(susceptibility(N, magnetization_list[5000:])[0])
 
     return np.mean(susceptibilities), np.std(susceptibilities)
 
 if __name__ == "__main__":
-    all_probabilities = [0.05, 0.075, 0.0875, 0.09375, 0.096875]
-    #all_probabilities = [0.2, 0.15, 0.125, 0.1125, 0.10625, 0.01, 0.05, 0.075, 0.0875, 0.09375, 0.096875]
+    all_probabilities = [0.01, 0.05, 0.075, 0.0875, 0.09375, 0.096875, 0.10625, 0.1125, 0.125, 0.15, 0.2]
     all_numbers = [50]
 
     for p in all_probabilities:

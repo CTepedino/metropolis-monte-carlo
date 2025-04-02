@@ -4,10 +4,6 @@ import sys
 import os
 
 def read_data(file_path):
-    """
-    Reads the data from a file where each line contains 'p mean std'.
-    Returns three lists: probabilities (p), means, and standard deviations (std).
-    """
     probabilities = []
     means = []
     stds = []
@@ -22,16 +18,14 @@ def read_data(file_path):
     return probabilities, means, stds
 
 def plot_data(probabilities, means, stds, scalar):
-    """
-    Creates a scatter plot with error bars.
-    X-axis: probabilities (p)
-    Y-axis: consensus averages (mean)
-    Error bars: standard deviations (std)
-    """
-    plt.errorbar(probabilities, means, yerr=stds, fmt='o', ecolor='black', capsize=5, markersize=10)
+    if scalar == 'susceptibility':
+        scalar_str = "Susceptibilidad" 
+    else: 
+        scalar_str = "Magnetización"
+    plt.errorbar(probabilities, means, yerr=stds, fmt='o', ecolor='black', capsize=5, markersize=1)
     plt.scatter(probabilities, means, color='blue')
     plt.xlabel('Probablidad')
-    plt.ylabel(f'{scalar} Promedio')
+    plt.ylabel(f'{scalar_str} Promedio')
     output_path = os.path.join('observables', f'{scalar}_average_from_{probabilities[0]}_to_{probabilities[-1]}.png')
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.close()
