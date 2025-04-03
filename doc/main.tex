@@ -138,10 +138,10 @@ Este proceso se repite considerando un periodo elegido, que en particular para e
 A partir de la recolección de los estados obtenidos, luego de una cantidad de pasos considerable, es posible tomar métricas que reflejen los cambios producidos, dentro de las cuales se encuentran el consenso y la susceptibilidad.
 
 El consenso se define formalmente como:
-    $$M(t)=|{\frac{1}{N^{2}}}\sum_{i,j}S_{i,j}(t)|$$
+    $$M(t)=|{\frac{1}{N^{2}}}\sum_{i,j}S_{i,j}(t)|$$ (1)
 
 La susceptibilidad se define formalmente como:
-    $$\chi=N^{2}\left(\langle M^{2}\rangle-\langle M\rangle^{2}\right)$$
+    $$\chi=N^{2}\left(\langle M^{2}\rangle-\langle M\rangle^{2}\right)$$ (2)
 
 \section{Implementación}
 \begin{figure}[h]
@@ -165,8 +165,18 @@ A propósito de la implementación del algoritmo, el método $getNeighbourOpinio
 Luego de cada paso de Montecarlo se imprimen las posiciones de las celdas que cambiaron de estado respecto del paso anterior, indicándose en cada línea el índice de la fila y la columna de la celda. A continuación en una nueva línea se encuentra la palabra 'next' o 'end' que indica si hay o no un siguiente paso en la simulación ejecutada.
 
 \section{Simulaciones}
+\subsection{Variaciones del sistema con un $N$ fijo}
+En primer lugar, se experimentó con un tamaño de $N = 50$ para la matriz inicial, de manera tal de ver que efectos se pueden observar de someter el sistema a diferentes valores de $p$: \{0.01, 0.1, 0.9\}. El objetivo de esta simulación es poder entender en que valores de p se obtiene una mayor variación de las opiniones en la grilla, a partir de lo que se puede observar de animar cada uno de los pasos realizados.
 
+A continuación, tomando en cuenta, que una de las formas de medir el resultado de aplicar este modelo una cantidad finita de veces es por medio del consenso, se decidió tomar los mismos valores de $p$ pero considerando una cantidad de pasos suficiente para alcanzar un estado estacionario. Con esta simulación se pretende observar la variación del consenso hasta alcanzar el estacionario luego de un cierto número de pasos y poder comparar estos valores una vez alcanzado este valor. 
+
+Luego, considerando los observables definidos anteriormente, se tomaron 10 valores de $p$ distintos para poder visualizar la variación del consenso y la susceptibilidad a lo largo de los diferentes valores elegidos en torno al $p_{critico}$. El objetivo de esta simulación consiste en poder analizar de forma más precisa la evolución del sistema ante diferentes valores de $p$, evidenciando el comportamiento del sistema al acercarse $p_{crítico}$.
+
+\subsection{Variaciones del sistema con un $N$ variable}
+Finalmente, se repite la última simulación descrita pero, en este caso, se busca tomar valores por debajo y por encima del $N$ fijado anteriormente. Los valores tomados para comparar son $N = \{25,50,75,100\}$. 
+ 
 \section{Resultados}
+\subsection{Variaciones del sistema con $N = 50$}
 
 \section{Conclusiones}
 
