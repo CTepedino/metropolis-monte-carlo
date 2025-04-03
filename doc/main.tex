@@ -27,6 +27,7 @@
 \usepackage{amssymb}
 \usepackage{fancyvrb}
 \usepackage{times}
+\usepackage{hyperref}
 
 \newcommand{\keyword}[1]{\textcolor{blue}{\textbf{#1}}}
 
@@ -177,7 +178,108 @@ Finalmente, se repite la última simulación descrita pero, en este caso, se bus
  
 \section{Resultados}
 \subsection{Variaciones del sistema con $N = 50$}
+Para la primera simulación se decidieron realizar tres animaciones, una por cada valor de $p$ utilizado. Por otro lado para visualizar la evolución del consenso, se tomaron 30000 pasos de Montecarlo y se graficaron los valores obtenidos.
+
+Para $p = 0.01$:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{animación_0.01_50.png} 
+    \caption{Fotograma de la animación de la simulación con p = 0.01 y N = 50}
+\end{figure}
+
+Para observar la animación utilizar el siguiente \href{https://www.youtube.com/watch?v=dQw4w9WgXcQ}{link a Youtube}
+
+Por otro lado, para la evolución del consenso se obtuvo el siguiente gráfico:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{consensus_evolution_n_50_p_0.01.png} 
+    \caption{Consenso vs pasos de Montecarlo para p=0.01 y N=50}
+\end{figure}
+
+En este caso se puede observar como luego de menos de 5000 pasos se empieza a estabilizar el valor del consenso en un valor cercano por encima de 0.95. Esto se podría explicar teniendo en cuenta que se trata de un valor de p que favorece a que cada individuo tenga con una gran probabilidad la misma opinión que la mayoría de sus vecinos por lo que rápidamente se alcanza un grado de consenso elevado.
+
+Para $p = 0.1$:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{animación_0.1_50.png} 
+    \caption{Fotograma de la animación de la simulación con p = 0.1 y N = 50}
+\end{figure}
+
+Para observar la animación utilizar el siguiente \href{https://www.youtube.com/watch?v=dQw4w9WgXcQ}{link a Youtube}
+
+Por otro lado, para la evolución del consenso se obtuvo el siguiente gráfico:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{consensus_evolution_n_50_p_0.1.png} 
+    \caption{Consenso vs pasos de Montecarlo para p=0.1 y N=50}
+\end{figure}
+
+En este caso se puede observar como luego de una serie de pasos si bien se sigue teniendo un valor del consenso variable, se repiten los valores que oscilan desde 0.01 hasta 0.7 aproximadamente. 
+
+Para $p = 0.9$:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{animación_0.9_50.png} 
+    \caption{Fotograma de la animación de la simulación con p = 0.9 y N = 50}
+\end{figure}
+
+Para observar la animación utilizar el siguiente \href{https://www.youtube.com/watch?v=dQw4w9WgXcQ}{link a Youtube}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{consensus_evolution_n_50_p_0.9.png} 
+    \caption{Consenso vs pasos de Montecarlo para p=0.9 y N=50}
+\end{figure}
+
+En este caso nuevamente se puede encontrar rápidamente una variación de valores aunque en este caso se agrupan principalmente por debajo de 0.1. Nuevamente es un resultado que acompaña con lo esperado considerado que se trata del valor más alto utilizado y lleva a que en la mayoría de los casos cada individuo vaya en contra de la opinión del resto de sus vecinos.
+
+Por otro lado para las simulaciones que se realizaron con los 10 valores de p alrededor de $p_{critico}$. Para esto se realizaron una serie de pruebas preliminares tomando diferentes valores para validar el valor aproximado de $p_{crítico}$ considerando el comportamiento observado en la simulación anterior. Como resultado, se encontró el punto crítico en 0.1 y se tomaron los siguientes puntos para realizar las simulaciones:
+
+$p = \{0.01, 0.05, 0.075, 0.0875, 0.09375, 0.096875, 0.10625, 0.1125, 0.125, 0.15, 0.2\}$
+
+Para cada uno de ellos se decidieron hacer 10 simulaciones considerando diferentes seeds de manera tal de luego calcular un promedio a partir de los valores estacionarios obtenidos de cada una de ellas.
+
+A continuación se presentan los resultados obtenidos para ambos observables:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{magnetization_mean_n_50.png} 
+    \caption{$\lt M\gt $ vs p}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{susceptibility_50.png} 
+    \caption{$\chi$ vs p}
+\end{figure}
+
+De estos gráficos se puede destacar como en los valores cercanos al $p_{critico}$, donde el consenso está en un estado transitorio por tener una pendiente más alta de descenso, se encuentran errores más altos. A su vez es en estos valores que se puede encontrar mayores valores de susceptibilidad, lo que concuerda con lo observado para el consenso.
+
+\subsection{Variaciones del sistema con un $N$ variable}
+Para esta simulación se decidieron tomar los valores de $N = \{25,75,100\}}$ los cuales se utilizaron para correr las simulaciones para cada una con la misma metodología que fue explicada para la simulación anterior.
+
+Se decidió incluir en cada caso el resultado obtenido en $N = 50$ para que sea más simple la comparación de los resultados.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{magnetization_mean_comparison.png} 
+    \caption{$\lt M\gt $ vs p}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{susceptibilities_comparison.png} 
+    \caption{$\chi$ vs p}
+\end{figure}
+
+A partir de estos resultados se puede observar cómo a medida que aumenta el N si bien en general se mantiene el mismo comportamiento analizado para el consenso pero se alcanzan valores menores. 
+
+Por el contrario, para el caso de la susceptibilidad así como se mantiene el mismo comportamiento analizado alrededor del $p_{critico}$ a diferencia del consenso, cuanto mayor es el N se obtienen valores más altos de susceptibilidad.
 
 \section{Conclusiones}
 
-\end{document}4
+
+\end{document}
