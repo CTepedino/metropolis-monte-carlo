@@ -163,7 +163,7 @@ Habiendo definido la matriz inicial, se pone en marcha la simulación llamando a
 A propósito de la implementación del algoritmo, el método $getNeighbourOpinions(int, int)$ se encarga de calcular la opinión de la mayoría de los vecinos para una celda especificada por medio del índice de fila y columna que se pasan por parámetro. En este método se tienen en cuenta las condiciones periódicas de contorno al momento de calcular cuáles son las posiciones que se requieren revisar como parte de las celdas vecinas. 
 
 \subsection{Salida}
-Luego de cada paso de Montecarlo se imprimen las posiciones de las celdas que cambiaron de estado respecto del paso anterior, indicándose en cada línea el índice de la fila y la columna de la celda. A continuación en una nueva línea se encuentra la palabra 'next' o 'end' que indica si hay o no un siguiente paso en la simulación ejecutada.
+Luego de cada paso de Montecarlo se imprimen las posiciones de las celdas que cambiaron de estado respecto del paso anterior, indicándose en cada línea el índice de la fila y la columna de la celda. A continuación, en una nueva línea se encuentra la palabra 'next' o 'end' que indica si hay o no un siguiente paso en la simulación ejecutada.
 
 \section{Simulaciones}
 \subsection{Variaciones del sistema con un $N$ fijo}
@@ -259,14 +259,14 @@ A continuación se presentan los resultados obtenidos para ambos observables:
 De estos gráficos se puede destacar como en los valores cercanos al $p_{critico}$, donde el consenso está en un estado transitorio por tener una pendiente más alta de descenso, se encuentran errores más altos. A su vez es en estos valores que se puede encontrar mayores valores de susceptibilidad, lo que concuerda con lo observado para el consenso.
 
 \subsection{Variaciones del sistema con un $N$ variable}
-Para esta simulación se decidieron tomar los valores de $N = \{25,75,100\}}$ los cuales se utilizaron para correr las simulaciones para cada una con la misma metodología que fue explicada para la simulación anterior.
+Para esta simulación se decidieron tomar los valores de $N = \{25,75,100\}$ los cuales se utilizaron para correr las simulaciones para cada una con la misma metodología que fue explicada para la simulación anterior.
 
 Se decidió incluir en cada caso el resultado obtenido en $N = 50$ para que sea más simple la comparación de los resultados.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{magnetization_mean_comparison.png} 
-    \caption{$\lt M\gt $ vs p}
+    \caption{$< M>$ vs p}
 \end{figure}
 
 \begin{figure}[H]
@@ -275,11 +275,13 @@ Se decidió incluir en cada caso el resultado obtenido en $N = 50$ para que sea 
     \caption{$\chi$ vs p}
 \end{figure}
 
-A partir de estos resultados se puede observar cómo a medida que aumenta el N si bien en general se mantiene el mismo comportamiento analizado para el consenso pero se alcanzan valores menores. 
+A partir de estos resultados se puede observar cómo a medida que aumenta el N si bien en general se mantiene el mismo comportamiento analizado para el consenso, se alcanzan valores menores. 
 
 Por el contrario, para el caso de la susceptibilidad así como se mantiene el mismo comportamiento analizado alrededor del $p_{critico}$ a diferencia del consenso, cuanto mayor es el N se obtienen valores más altos de susceptibilidad.
 
 \section{Conclusiones}
+A través de las distintas simulaciones se pudo comprobar como a medida que aumenta la probabilidad de que un individuo cambie de estado en contra de la opinión de la mayoría de sus vecinos, disminuye el consenso. En particular, la forma en la que decrece no es lineal sino que como se pudo observar a partir del cálculo de la susceptibilidad la tasa de decrecimiento es mayor alrededor un valor de p que llamamos $p_{critico}$. En base a lo observado concluimos que este valor se encuentra en $p=0.1$ aproximadamente.
 
+Por otra parte, en cuanto al efecto que el valor de N tiene sobre las simulaciones para este modelo, se puede concluir que a medida que el valor de N es mayor los valores de consenso obtenidos son menores incluso para los mismos valores de p. Mientras que a medida que aumenta el N la susceptibilidad aumenta para cada uno de los puntos observados.
 
 \end{document}
